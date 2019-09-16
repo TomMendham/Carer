@@ -1,0 +1,25 @@
+.mat-card-storyboards {
+  min-width: 150px;
+  max-width: 500px;
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  /* Non standard for WebKit */
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+}
+
+
+.coloured {
+  background-color: slateblue;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}

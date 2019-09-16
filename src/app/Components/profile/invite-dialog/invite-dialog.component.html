@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Invite</h1>
+<div mat-dialog-content>
+  <p class="mat-body">Enter the unique key of the user to invite:</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.memberID">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.memberID" cdkFocusInitial>Invite</button>
+</div>

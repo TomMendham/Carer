@@ -1,0 +1,19 @@
+<file-drop dropZoneLabel="Drop files here" (onFileDrop)="onDrop($event)"></file-drop>
+<br>
+<button mat-button (click)="FileInput.click()">Add a file</button>
+<input hidden type="file" #FileInput (change)="onChange($event)"/>
+<br>
+<div *ngIf="percentage | async as pct">
+  <h3 class="mat-h3">File progress:</h3><br>
+  <div *ngIf="pct != 100">
+  <mat-progress-bar mode="determinate"
+            value="{{pct | number}}"
+            max="100">
+  </mat-progress-bar>
+  <p class="mat-body">{{ pct | number }}%</p>
+  </div>
+</div>
+
+<div *ngIf="downloadURL as url">
+  <p class="mat-body">File uploaded successfully</p>
+</div>

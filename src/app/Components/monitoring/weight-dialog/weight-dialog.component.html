@@ -1,0 +1,34 @@
+<h1 mat-dialog-title>Enter new weight log</h1>
+<div mat-dialog-content>
+  <p class="mat-body">Enter weight and date recorded</p>
+  <form [formGroup]="weightForm">
+    <mat-form-field *ngIf="weightForm.get('metric').value === 'kg'">
+      <input type="number" matInput placeholder="kg" formControlName="weight" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="weightForm.get('metric').value === 'lbs'">
+      <input type="number" matInput placeholder="lbs" formControlName="weight" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="weightForm.get('metric').value === 'stone'">
+      <input type="number" matInput placeholder="stone" formControlName="weight" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Metric</mat-label>
+      <mat-select formControlName="metric">
+        <mat-option value="kg">kg</mat-option>
+        <mat-option value="stone">stone</mat-option>
+        <mat-option value="lbs">lbs</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="mat-body" *ngIf="weightForm.invalid && weightForm.touched">Form is invalid - please check details</span>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-button color="primary" *ngIf="weightForm.valid" [mat-dialog-close]="weightForm" cdkFocusInitial>Submit</button>
+  <button mat-button disabled *ngIf="weightForm.invalid">Submit</button>
+</div>

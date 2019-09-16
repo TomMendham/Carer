@@ -1,0 +1,30 @@
+.column {
+  float: left;
+  width: 50%;
+}
+
+.mat-card {
+  width: 90%;
+}
+
+.mat-card-content {
+  width: 90%;
+  height: calc(100% - 70px);
+}
+
+.mat-card-actions {
+  height: calc(100% - 70px);
+}
+
+.mat-h2 {
+  text-align: center;
+}
+
+.mat-grid-tile {
+}
+
+.chartjs-render-monitor {
+  max-height: 500px;
+  max-width: 500px;
+  height: calc(100% - 30px);
+}

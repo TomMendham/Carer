@@ -1,0 +1,80 @@
+<mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step>
+      <div>
+        <ng-template matStepLabel>Key medication information</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="name" [(ngModel)]="data.name" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="dosage" [(ngModel)]="data.dosage" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Advanced information</ng-template>
+      <div>
+        <mat-form-field>
+          <textarea matInput placeholder="instructions" [(ngModel)]="data.instructions" required></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="purpose" [(ngModel)]="data.purpose" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Expiration date" [(ngModel)]="data.expirationDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Prescription information</ng-template>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="amount" [(ngModel)]="data.amount" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Prescribed by" [(ngModel)]="data.prescribedBy" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Prescribed Date"  [(ngModel)]="data.prescriptionDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Review</ng-template>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Medication</mat-card-title>
+        <mat-card-subtitle>Please review details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="mat-body-strong">Key Details: <br></p>
+        Name: {{data.name}} <br>
+        Dosage: {{data.dosage}} <br>
+        <br>
+        <p class="mat-body-strong">Information: <br></p>
+        Instructions:{{data.instructions}} <br>
+        Expiration Date: {{data.expirationDate}} <br>
+        <br>
+        <p class="mat-body-strong">Prescription Details <br></p>
+        Amount: {{data.amount}} <br>
+        Prescribed by: {{data.prescribedBy}} <br>
+        Prescription date: {{data.prescriptionDate}} <br>
+      </mat-card-content>
+      <mat-card-actions>
+        <p class="mat-body-strong">Missing details, please fill in all required fields</p>
+      </mat-card-actions>
+    </mat-card>
+    <button mat-button color="primary" [mat-dialog-close]="data">Submit</button>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button (click)="onNoClick()">Close</button>
+  </mat-step>
+</mat-vertical-stepper>

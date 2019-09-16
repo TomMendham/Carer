@@ -1,0 +1,59 @@
+<mat-toolbar color="Accent">
+  <mat-toolbar-row>
+    <span class="example-spacer">Profile</span>
+      <button mat-raised-button color="warn" (click)="authService.logout()"
+              [routerLink]="['']">Logout
+      </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <h2 class="mat-title">Your profile</h2>
+</div>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="100" fxLayoutAlign="center">
+    <mat-card *ngIf="user != null" class="mat-elevation-z3">
+      <mat-card-content>
+        <p class="mat-body-1">Name: {{user.name}} <br>
+        Bio: {{user.bio}} <br>
+        Email: {{user.email}} <br>
+        Gender: {{user.gender}} <br>
+        jobDesc: {{user.jobDesc}} <br>
+        Unique ID: {{user.uid}} <br>
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<br>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <h2 class="mat-title">Your storyboards</h2>
+</div>
+<mat-grid-list cols="{{cols | async}}" rowHeight="250px">
+  <mat-grid-tile *ngFor="let storyboard of storyboardArray">
+    <mat-card class="mat-card-storyboards mat-elevation-z3" >
+      <mat-card-header>
+        <mat-card-title *ngIf="storyboard.id !== user.currentStoryboard"> {{storyboard.name}}</mat-card-title>
+        <mat-card-title *ngIf="storyboard.id === user.currentStoryboard"> {{storyboard.name}} - Current</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Members:</p>
+        <p *ngFor="let member of storyboard.members"> {{member}} </p>
+        <p>ID: {{storyboard.id}}<br></p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="openDialog(storyboard.id)">Invite</button>
+        <button mat-button (click)="onSet(storyboard.id)">Set</button>
+        <button mat-button color="warn" (click)="onRemove(storyboard.id)">Leave</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="100" fxLayoutAlign="end">
+    <button (click)="openAddStoryboardDialog()" mat-mini-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
+

@@ -1,0 +1,90 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Planner</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="33.3" fxLayoutAlign="start">
+      <mat-button-toggle-group name="picker" ariaLabel="Picker">
+      <mat-button-toggle
+        value="Previous"
+        mwlCalendarPreviousView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        Previous
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="Today"
+        mwlCalendarToday
+        [(viewDate)]="viewDate">
+        Today
+      </mat-button-toggle>
+      <mat-button-toggle
+        value="next"
+        mwlCalendarNextView
+        [view]="view"
+        [(viewDate)]="viewDate"
+        (viewDateChange)="closeOpenMonthViewDay()">
+        Next
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div fxFlex="33.3" fxLayoutAlign="center">
+    <h3 class="mat-h3">{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
+  </div>
+  <div fxFlex="33.3" fxLayoutAlign="end">
+    <mat-button-toggle-group name="viewStyle" ariaLabel="View Style">
+      <mat-button-toggle
+        (click)="setView(CalendarView.Month)"
+        [class.active]="view === CalendarView.Month">
+        Month
+      </mat-button-toggle>
+      <mat-button-toggle
+        (click)="setView(CalendarView.Week)"
+        [class.active]="view === CalendarView.Week">
+        Week
+      </mat-button-toggle>
+      <mat-button-toggle
+        (click)="setView(CalendarView.Day)"
+        [class.active]="view === CalendarView.Day">
+        Day
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+</div>
+<br />
+<div [ngSwitch]="view">
+  <mwl-calendar-month-view
+    *ngSwitchCase="CalendarView.Month"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    [activeDayIsOpen]="activeDayIsOpen"
+    (dayClicked)="dayClicked($event.day)"
+    (eventClicked)="handleEvent($event.event)">
+  </mwl-calendar-month-view>
+  <mwl-calendar-week-view
+    *ngSwitchCase="CalendarView.Week"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent($event.event)">
+  </mwl-calendar-week-view>
+  <mwl-calendar-day-view
+    *ngSwitchCase="CalendarView.Day"
+    [viewDate]="viewDate"
+    [events]="events"
+    [refresh]="refresh"
+    (eventClicked)="handleEvent($event.event)">
+  </mwl-calendar-day-view>
+</div>
+<br>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="100" fxLayoutAlign="end">
+    <button (click)="openAddEventDialog()" mat-mini-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

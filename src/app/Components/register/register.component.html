@@ -1,0 +1,84 @@
+<mat-toolbar color="Accent">
+  <mat-toolbar-row>
+    <span>Register</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="registerForm">
+    <form [formGroup]="registerForm">
+      <div formGroupName="accountDetails">
+      <ng-template matStepLabel>Fill out your account details</ng-template>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Email" formControlName="email" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input type="password" matInput placeholder="Password" formControlName="password" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="registerForm">
+    <form [formGroup]="registerForm">
+      <div formGroupName="profileDetails">
+      <ng-template matStepLabel>Fill out your profile</ng-template>
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Full name" formControlName="name" required>
+        </mat-form-field>
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Bio" formControlName="bio" required></textarea>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Job Description" formControlName="jobDesc" required>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="DoB">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender">
+          <mat-option  *ngFor="let gender of genders" [value]="gender.viewValue" >
+            {{ gender.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      </div>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Register</ng-template>
+    <div>
+      <br>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Account Details</mat-card-title>
+          <mat-card-subtitle>Please review your details!</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="mat-body">
+            Email Address: {{ registerForm.get('accountDetails.email').value}} <br>
+            Name: {{registerForm.get('profileDetails.name').value}} <br>
+            Bio: {{registerForm.get('profileDetails.bio').value}} <br>
+            Job Description: {{registerForm.get('profileDetails.jobDesc').value}} <br>
+            Date of Birth: {{registerForm.get('profileDetails.DoB').value | date:'mediumDate'}} <br>
+            Gender: {{registerForm.get('profileDetails.gender').value}} <br>
+          </p>
+          <span *ngIf="!registerForm.valid">Details are missing please fill them out before registering!</span>
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="registerForm.valid" mat-raised-button color="primary" (click)="onRegister()">Register</button>
+        </mat-card-actions>
+      </mat-card>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button>Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

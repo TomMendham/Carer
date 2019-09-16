@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Enter new height log</h1>
+<div mat-dialog-content>
+  <p class="mat-body">Enter height and date recorded</p>
+  <form [formGroup]="heightForm">
+    <mat-form-field *ngIf="heightForm.get('metric').value === 'cm'">
+      <input type="number" matInput placeholder="cm" formControlName="cm" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="heightForm.get('metric').value === 'ft,in'" required>
+      <input type="number" matInput placeholder="Feet" formControlName="ft">
+    </mat-form-field>
+    <mat-form-field *ngIf="heightForm.get('metric').value === 'ft,in'">
+      <input type="number" matInput placeholder="Inches" formControlName="in" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Metric</mat-label>
+      <mat-select formControlName="metric" required>
+        <mat-option value="cm">cm</mat-option>
+        <mat-option value="ft,in">ft, in</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <span class="mat-body" *ngIf="heightForm.invalid && heightForm.touched">Form is invalid - please check details</span>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-button color="primary" *ngIf="heightForm.valid" [mat-dialog-close]="heightForm" cdkFocusInitial>Submit</button>
+  <button mat-button disabled *ngIf="heightForm.invalid">Submit</button>
+</div>

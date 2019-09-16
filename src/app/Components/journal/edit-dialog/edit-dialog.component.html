@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Edit journal entry</h1>
+<div mat-dialog-content>
+  <p class="mat-body">Change the details you wish to edit</p>
+  <mat-form-field>
+    <input placeholder="Name" matInput [(ngModel)]="data.name">
+  </mat-form-field>
+  <mat-form-field>
+    <textarea placeholder="Details" matInput [(ngModel)]="data.text"></textarea>
+  </mat-form-field>
+  <mat-form-field>
+    <input placeholder="Date" matInput [matDatepicker]="picker" [(ngModel)]="data.timestamp">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input placeholder="Topic" matInput [(ngModel)]="data.topic">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-button color="primary" [mat-dialog-close]="data" cdkFocusInitial>Submit</button>
+</div>

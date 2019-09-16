@@ -1,0 +1,35 @@
+<h3 class="mat-h3">Add new event</h3>
+<div mat-dialog-content>
+  <form [formGroup]="eventForm">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Name" formControlName="name" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" placeholder="Details" formControlName="details" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Start Date" formControlName="startDate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="eventForm.get('allDay').value !== true">
+      <input matInput type="time" placeholder="Start time" formControlName="startTime">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="End Date" formControlName="endDate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="eventForm.get('allDay').value !== true">
+      <input matInput type="time" placeholder="End time" formControlName="endTime">
+    </mat-form-field>
+    <mat-slide-toggle type="checkbox" formControlName="allDay">All day</mat-slide-toggle>
+  </form>
+  <span class="mat-body" *ngIf="eventForm.invalid && eventForm.touched">Form is invalid - please check details</span>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="warn" (click)="onNoClick()">Cancel</button>
+  <button mat-button color="primary" *ngIf="eventForm.valid" [mat-dialog-close]="eventForm" cdkFocusInitial>Submit</button>
+  <button mat-button disabled *ngIf="eventForm.invalid">Submit</button>
+</div>
+

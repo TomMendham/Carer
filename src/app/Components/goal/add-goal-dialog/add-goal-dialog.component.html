@@ -1,0 +1,44 @@
+<h3 class="mat-h3">Add goal</h3>
+<mat-divider></mat-divider>
+<br>
+<div mat-dialog-content>
+  <form [formGroup]="goalForm">
+    <mat-form-field>
+      <input matInput placeholder="Goal Name" formControlName="name" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Assignee" formControlName="assignee" required>
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Details" formControlName="details" required></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Completion date" formControlName="completionDate" required>
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <h4 class="mat-h4">Milestones</h4>
+      <div formArrayName="milestones">
+        <div *ngFor="let milestone of milestones.controls let i = index;">
+          <div>
+            <mat-form-field>
+              <input matInput placeholder="Milestone name" type="text" [formControlName]="i" required>
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+        <button mat-mini-fab (click)="addMilestone()" color="primary">
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+    </div>
+    <span class="mat-body" *ngIf="goalForm.invalid && goalForm.touched">Form is invalid - please check details</span>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button *ngIf="goalForm.valid" [mat-dialog-close]="goalForm" color="primary">Submit</button>
+  <button mat-button (click)="onNoClick()" color="warn">Cancel</button>
+  <button mat-button disabled *ngIf="goalForm.invalid">Submit</button>
+</div>

@@ -1,0 +1,78 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Dashboard - {{ storyboardName }}</span>
+    <p></p>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-grid-list cols="{{ cols | async}}" rowHeight="500px">
+  <mat-grid-tile>
+    <div [routerLink]="['/journal']" >
+      <mat-card class="mat-elevation-z3">
+        <mat-card-header>
+          <mat-card-title>Journal</mat-card-title>
+          <mat-card-subtitle>Visit the journal page</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://firebasestorage.googleapis.com/v0/b/carer-51f94.appspot.com/o/site%20images%2FProject%20-%20Drawing%202-1275616203.png?alt=media&token=94998095-907f-4510-8397-addc22e1ed7a">
+        <mat-card-actions>
+          <button [disabled]="canView" mat-button [routerLink]="['/journal']" color="primary"><mat-icon>play_arrow</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div [routerLink]="['/monitoring']">
+    <mat-card class="mat-elevation-z3">
+      <mat-card-header>
+        <mat-card-title>Monitoring</mat-card-title>
+        <mat-card-subtitle>Visit the monitoring page</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="https://firebasestorage.googleapis.com/v0/b/carer-51f94.appspot.com/o/site%20images%2FProject%20-%20Drawing%202-1784269005.png?alt=media&token=408cddb2-529c-4916-9331-d7d16c21a627">
+      <mat-card-actions>
+        <button [disabled]="canView" mat-button [routerLink]="['/monitoring']" color="primary"><mat-icon>play_arrow</mat-icon></button>
+      </mat-card-actions>
+    </mat-card>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div [routerLink]="['/planner']">
+      <mat-card class="mat-elevation-z3">
+        <mat-card-header>
+          <mat-card-title>Planner</mat-card-title>
+          <mat-card-subtitle>Visit the planning page</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://firebasestorage.googleapis.com/v0/b/carer-51f94.appspot.com/o/site%20images%2FProject%20-%20Drawing%201-1399231693.png?alt=media&token=02049d1a-df16-4df9-8cc6-85018a8cf70b">
+        <mat-card-actions>
+          <button [disabled]="canView" mat-button [routerLink]="['/planner']" color="primary"><mat-icon>play_arrow</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <div [routerLink]="['/information']">
+      <mat-card class="mat-elevation-z3">
+        <mat-card-header>
+          <mat-card-title>Information</mat-card-title>
+          <mat-card-subtitle>Visit your information page</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://firebasestorage.googleapis.com/v0/b/carer-51f94.appspot.com/o/site%20images%2FProject%20-%20Drawing%2031829433376.png?alt=media&token=26dffad6-3b22-4689-9cb2-db975b0d1962">
+        <mat-card-actions>
+          <button [disabled]="canView" mat-button [routerLink]="['/information']" color="primary"><mat-icon>play_arrow</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </mat-grid-tile>
+    <mat-grid-tile>
+      <div [routerLink]="['/goals']">
+      <mat-card class="mat-elevation-z3">
+        <mat-card-header>
+          <mat-card-title>Goals</mat-card-title>
+          <mat-card-subtitle>Visit the goals page</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://firebasestorage.googleapis.com/v0/b/carer-51f94.appspot.com/o/site%20images%2FProject%20-%20Drawing%201-1238992641.png?alt=media&token=c375f018-6880-4f5c-a821-1d609b7836da">
+        <mat-card-actions>
+          <button [disabled]="canView" mat-button [routerLink]="['/goals']" color="primary"><mat-icon>play_arrow</mat-icon></button>
+        </mat-card-actions>
+      </mat-card>
+      </div>
+    </mat-grid-tile>
+</mat-grid-list>

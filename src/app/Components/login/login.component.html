@@ -1,0 +1,34 @@
+<mat-toolbar color="Accent">
+  <mat-toolbar-row>
+    <span>Log in</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title>Log in</mat-card-title>
+    <mat-card-subtitle>Enter your email and password</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input
+          type="text"
+          matInput placeholder="Email Address"
+          #userEmail>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input
+          type="password"
+          matInput placeholder="Password"
+          #userPassword>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="centre">
+    <button mat-raised-button color="primary" (click)="authService.login(userEmail.value, userPassword.value)">Log In</button>
+    </div>
+  </mat-card-actions>
+</mat-card>

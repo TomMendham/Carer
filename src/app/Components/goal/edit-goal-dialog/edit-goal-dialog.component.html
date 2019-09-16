@@ -1,0 +1,41 @@
+<h3 class="mat-h3">Add goal</h3>
+<mat-divider></mat-divider>
+<br>
+<div mat-dialog-content>
+    <mat-form-field>
+      <input matInput placeholder="Goal Name" [(ngModel)]="data.name">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Assignee" [(ngModel)]="data.assignee">
+    </mat-form-field>
+    <mat-form-field>
+      <textarea matInput placeholder="Details" [(ngModel)]="data.details"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker2" placeholder="Completion date" [(ngModel)]="data.completionDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div>
+      <h4 class="mat-h4">Milestones</h4>
+      <div>
+        <div *ngFor="let milestone of data.milestones let i = index;">
+            <mat-form-field>
+              <input matInput placeholder="Milestone name" type="text" [(ngModel)]="data.milestones[i]">
+            </mat-form-field>
+          <button mat-mini-fab (click)="onRemove(milestone)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+      </div>
+      <button mat-mini-fab (click)="data.milestones.push('')" color="primary">
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+    </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="data">Edit goal</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

@@ -1,0 +1,45 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <span>Information</span>
+    <p></p>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<div class="width">
+  <br>
+  <div flex fxLayout="row fxLayoutAlign=center">
+    <div fxFlex="100" fxLayoutAlign="center">
+      <h2 class="mat-h2">Your files</h2>
+    </div>
+  </div>
+  <div>
+    <mat-grid-list cols="{{cols | async}}" rowHeight="100px">
+      <mat-grid-tile  *ngFor="let file of fileArray">
+        <mat-card class="mat-elevation-z3">
+          <mat-card-header>
+            <mat-icon>file_copy</mat-icon>
+            <h3 class="mat-h3">{{file.name}}</h3>
+            <span class="spacer"></span>
+            <a href="{{file.downloadURL}}">
+              <button mat-icon-button color="primary">
+                <mat-icon>cloud_download</mat-icon>
+              </button>
+            </a>
+            <button mat-icon-button color="warn" (click)="onDelete(file.path, file.id)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-header>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+  <div>
+  </div>
+  <div flex fxLayout="row" fxLayoutAlign="center">
+    <div fxFlex="100" fxLayoutAlign="end">
+      <button (click)="openAddFileDialog()" mat-mini-fab>
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

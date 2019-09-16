@@ -1,0 +1,36 @@
+<mat-toolbar color="Accent">
+  <mat-toolbar-row>
+    <span>Journal</span>
+    <p></p>
+  </mat-toolbar-row>
+</mat-toolbar>
+<mat-grid-list cols="{{cols | async}}" rowHeight="400px">
+  <mat-grid-tile *ngFor="let log of journalLogs">
+    <mat-card class="mat-elevation-z3">
+      <mat-card-header>
+        <mat-card-title>{{ log.name }}</mat-card-title>
+        <mat-card-subtitle>Log details</mat-card-subtitle>
+        <mat-card-content>
+          <p class="mat-body">
+            Text: {{ log.text }} <br>
+            Created: {{ log.timestamp.seconds *1000 | date: 'dd-MM-yyyy'}} <br>
+            Creator: {{ log.creator }} <br>
+            Topic: {{ log.topic }}
+          </p>
+        </mat-card-content>
+      </mat-card-header>
+      <mat-card-actions *ngIf="currentUser.uid === log.creator">
+        <button mat-button (click)="openDialog(log)">Edit</button>
+        <button mat-button color="warn" (click)="onDelete(log.id)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<br>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="100" fxLayoutAlign="end">
+    <button (click)="openAddJournalDialog()" mat-mini-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>

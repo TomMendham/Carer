@@ -1,0 +1,86 @@
+<mat-vertical-stepper [linear]="isLinear" #stepper>
+  <mat-step [stepControl]="medicationForm">
+    <form [formGroup]="medicationForm">
+      <div formGroupName="medicationDetails">
+        <ng-template matStepLabel>Key medication information</ng-template>
+        <mat-form-field>
+          <input matInput placeholder="name" formControlName="name" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="dosage" formControlName="dosage" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="medicationForm">
+    <ng-template matStepLabel>Advanced information</ng-template>
+    <form [formGroup]="medicationForm">
+      <div formGroupName="information">
+        <mat-form-field>
+          <textarea matInput placeholder="instructions" formControlName="instructions" required></textarea>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="purpose" formControlName="purpose" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Expiration date" formControlName="expirationDate" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="medicationForm">
+    <ng-template matStepLabel>Prescription information</ng-template>
+    <form [formGroup]="medicationForm">
+      <div formGroupName="prescriptionDetails">
+      <mat-form-field>
+        <input matInput placeholder="amount" formControlName="amount" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Prescribed by" formControlName="prescribedBy" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker2" placeholder="Prescribed Date" formControlName="prescriptionDate" required>
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Review</ng-template>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Medication</mat-card-title>
+        <mat-card-subtitle>Please review details</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+          <p class="mat-body-strong">Key Details: <br></p>
+          Name: {{medicationForm.get('medicationDetails.name').value}} <br>
+          Dosage: {{medicationForm.get('medicationDetails.dosage').value}} <br>
+          <br>
+          <p class="mat-body-strong">Information: <br></p>
+          Instructions:{{medicationForm.get('information.instructions').value}} <br>
+          Expiration Date: {{medicationForm.get('information.expirationDate').value}} <br>
+          <br>
+          <p class="mat-body-strong">Prescription Details <br></p>
+          Amount: {{medicationForm.get('prescriptionDetails.amount').value}} <br>
+          Prescribed by: {{medicationForm.get('prescriptionDetails.prescribedBy').value}} <br>
+          Prescription date: {{medicationForm.get('prescriptionDetails.prescriptionDate').value}} <br>
+      </mat-card-content>
+      <mat-card-actions>
+        <p class="mat-body-strong" *ngIf="medicationForm.invalid && medicationForm.touched">Missing details, please fill in all required fields</p>
+      </mat-card-actions>
+    </mat-card>
+    <button *ngIf="medicationForm.valid" mat-button color="primary" [mat-dialog-close]="medicationForm" cdkFocusInitial>Submit</button>
+    <button mat-button matStepperPrevious>Back</button>
+    <button mat-button (click)="onNoClick()">Close</button>
+  </mat-step>
+</mat-vertical-stepper>

@@ -1,0 +1,18 @@
+<div>
+  <mat-toolbar color="primary" class="mat-elevation-z5">
+    <mat-toolbar-row>
+      <button mat-button [routerLink]="['']">
+        <h1>Caring Together</h1>
+      </button>
+      <span class="example-spacer"></span>
+      <div *ngIf="authService.isLoggedIn">
+        <button mat-button [routerLink]="['/dashboard']"  matTooltip="Home">
+          <mat-icon>home</mat-icon>
+        </button>
+      <button mat-button [routerLink]="['/profile']"  matTooltip="Profile">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+</div>

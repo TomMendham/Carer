@@ -1,0 +1,79 @@
+<mat-toolbar color="Accent">
+  <mat-toolbar-row>
+    <span>Monitoring</span>
+    <p></p>
+  </mat-toolbar-row>
+</mat-toolbar>
+<br>
+<br>
+<h2 class="mat-h2">Trackers</h2>
+  <mat-grid-list cols="{{cols | async}}" rowHeight="500px">
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z3">
+        <mat-card-header>
+          <mat-card-title>Height tracker</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas #heightLineChart>{{ heightChart }}</canvas>
+        </mat-card-content>
+        <mat-card-actions>
+          <button (click)="openHeightDialog()" mat-mini-fab aria-label="add">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-card class="mat-elevation-z3">
+        <mat-card-header>
+          <mat-card-title>Weight tracker</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <canvas #weightLineChart>{{ weightChart }}</canvas>
+        </mat-card-content>
+        <mat-card-actions>
+          <button (click)="openWeightDialog()" mat-mini-fab aria-label="add">
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
+<h2 class="mat-h2">Medications</h2>
+<mat-grid-list cols="{{cols | async}}" rowHeight="500px">
+  <mat-grid-tile *ngFor="let medication of medicationArray">
+  <mat-card class="mat-elevation-z3">
+    <mat-card-header>
+      <mat-card-title>{{ medication.name }}</mat-card-title>
+      <mat-card-subtitle> Medication information</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="mat-body-strong">Key Details: <br></p>
+      Name: {{medication.name}} <br>
+      Dosage: {{medication.dosage }} <br>
+      <br>
+      <p class="mat-body-strong">Information: <br></p>
+      Instructions: {{medication.instructions}} <br>
+      Expiration Date: {{medication.expirationDate | date: 'longDate'}}<br>
+      Purpose: {{medication.purpose}}<br>
+      <br>
+      <p class="mat-body-strong">Prescription Details <br></p>
+      Amount: {{medication.amount}} <br>
+      Prescribed by: {{medication.prescribedBy}} <br>
+      Prescription date: {{medication.prescriptionDate | date: 'longDate'}}<br>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="deleteMedication(medication.id)">Delete</button>
+      <button mat-button (click)="openEditMedicationDialog(medication)">Edit</button>
+    </mat-card-actions>
+  </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<br/>
+<div flex fxLayout="row" fxLayoutAlign="center">
+  <div fxFlex="100" fxLayoutAlign="end">
+    <button (click)="openMedicationDialog()" mat-mini-fab>
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
